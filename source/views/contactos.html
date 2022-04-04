@@ -1,0 +1,137 @@
+<html>
+<%-include('partials/head.html');%>
+
+	<body>
+		<header>
+			<%-include('partials/navegacion.html');%>
+		</header>
+
+		<div id="content">
+		<h1>Listado de Contactos</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Domicilio</th>
+					<th scope="col">Telefono</th>
+				</tr>
+			</thead>
+			<% if (contactos) { %>
+				<tbody>
+					<% for(var i=0; i < contactos.length; i++ ) { %>
+						<tr>
+							<td>
+								<%= contactos[i].idContactos %>
+							</td>
+							<td>
+								<%= contactos[i].nombre %>
+							</td>
+							<td>
+								<%= contactos[i].domicilio %>
+							</td>
+							<td>
+								<%= contactos[i].telefono %>
+							</td>
+						</tr>
+						<% } %>
+				</tbody>
+				<% } %>
+
+		</table>
+
+		<div id="botones">
+			<form action="/contactos" method="post">
+				<button type="submit" class="btn btn-primary mb-2">Ver</button>
+			</form>
+			<form action="/contactos" method="get">
+				<button action="/contactos" class="btn btn-primary mb-2">Limpiar</button>
+			</form>
+		</div>
+
+		<div class="agregarcontacto">
+			<h3>Agregar un nuevo contacto</h3> 
+			<form action="/contactos/nuevo" method="post">
+			<div class="form-group row" id="cont-agregar">
+				<div class="form-group row">
+				  <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+				  <div class="col-sm-10">
+					<input type="text" name="nombre" id="nombre" class="form-control" onkeypress="return validar(event)">
+				  </div>
+				</div>
+	  
+				<div class="form-group row">
+				  <label for="direccion" class="col-sm-2 col-form-label">Domicilio</label>
+				  <div class="col-sm-10">
+					<input type="text" name="domicilio" id="domicilio" class="form-control">
+				</div>
+				</div>
+				<div class="form-group row">
+					<label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
+					<div class="col-sm-10">
+					  <input type="text" name="telefono" id="telefono" class="form-control" onkeypress="return validarNumero(event)" >
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary mb-2" id="Agregar">Agregar</button>
+			
+		</form> 
+		</div>
+
+
+		<h3>Modificar Contacto</h3>
+		<form action="/contactos/id" method="get" id="ides">
+			<label for="idContactos">Contacto ID:</label>
+			<input type="text" id="idContactos"  class="form-control" name="idContactos" onkeypress="return validarNumero(event)">
+			<button type="submit" class="btn btn-primary mb-2" id="busc">Buscar</button>
+		</form>
+		</div>
+		<% if ( contacto ) { %>
+			<div>
+				<form action="/contactos/id" method="post">
+					<input type="hidden" name="idContactos" id="idContactos" value="<%=contacto.idContactos%>" onkeypress="return validar(event)">
+					<label for="nombre" class="col-sm-0 col-form-label">Nombre:</label>
+					<input type="text" id="nombre" name="nombre" value="<%=contacto.nombre%>"  onkeypress="return validar(event)">
+					<label for="domicilio" class="col-sm-0 col-form-label">Domicilio:</label>
+					<input type="text" id="domicilio" name="domicilio" value="<%=contacto.domicilio%>">
+					<label for="telefono" class="col-sm-0 col-form-label">Telefono:</label>
+					<input type="text" id="telefono" name="telefono" value="<%=contacto.telefono%>" onkeypress="return validarNumero(event)">
+					<button type="submit" class="btn btn-primary mb-2">Guardar</button>
+				</form>
+
+				<form action="/contactos/id/borrar" method="post">
+					<input type="hidden" name="idContactos" id="idContactos" value="<%=contacto.idContactos%>">
+					<button type="submit" class="btn btn-primary mb-2">Eliminar</button>
+				</form>
+			</div>
+			<% } %>
+
+
+				
+
+	</body>
+
+	<%-include('partials/footer.html');%>
+	</div>
+
+	<script type="text/javascript">
+		function validar(e) { // 1
+		tecla = (document.all) ? e.keyCode : e.which; // 2
+		if (tecla==8) return true; // 3
+		patron =/[A-Za-z\s]/; // 4
+		te = String.fromCharCode(tecla); // 5
+		return patron.test(te); // 6
+		}
+	</script>
+	<script>
+	function validarNumero(e) {
+		tecla = (document.all) ? e.keyCode : e.which;
+		if (tecla==8) return true; 
+		patron =/[0-9]/;
+		te = String.fromCharCode(tecla); 
+		return patron.test(te); 
+ 	}
+
+	</script>
+		
+</html>

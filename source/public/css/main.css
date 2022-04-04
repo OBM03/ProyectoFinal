@@ -1,0 +1,52 @@
+#seccion {
+    width: 1200px;
+    height: 1000px;
+    background-color: antiquewhite;
+    max-width: 0 auto;
+}
+
+img {
+    display: block;
+    border: 1px sloid #ddd;
+    margin: 0 auto;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+  .agregarcontacto{
+      margin-top: 1%;
+  }
+
+  #content{
+      margin-left: 5%;
+      margin-right: 5%;
+      background-color:  antiquewhite;
+  }
+  #botones{
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-left: 40%;
+  }
+
+ .agregarcontacto{
+     width: 50%;
+ }
+
+ #Agregar{
+     margin-left: 40%;
+     margin-top: 3%;
+ }
+
+ h1{
+    margin-top: 1%;
+ }
+
+ #idContactos{
+     width: 25%;
+ }
+
+ #busc{
+    margin-top: 2%;
+ }
